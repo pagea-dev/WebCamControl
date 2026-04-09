@@ -24,6 +24,7 @@ public class MiniWindow : Adw.Window
 	[Connect] private readonly Box _panAndTiltButtons = default!;
 	[Connect] private readonly Box _buttonsBox = default!;
 	[Connect] private readonly Scale _zoom = default!;
+	[Connect] private readonly Box _preview = default!;
 #pragma warning restore CS0649 // Field is never assigned to, and will always have its default value
 
 	public MiniWindow(
@@ -48,6 +49,7 @@ public class MiniWindow : Adw.Window
 		// TODO: Configure proper icon
 
 		_panAndTiltButtons.Append(new PanAndTiltButtons(_camera));
+		_preview.Append(new CameraPreview(_camera, width: 160, height: 120));
 		InitializePresets();
 		InitializeZoom();
 

@@ -18,61 +18,73 @@ Adw.ApplicationWindow mini_window {
     }
 
     content: Box {
+      orientation: vertical;
       margin-start: 12;
       margin-bottom: 12;
       margin-end: 12;
+      spacing: 8;
 
-      Box _panAndTiltButtons {}
-      
-      Scale _zoom {
-        orientation: vertical;
-        hexpand: true;
-        inverted: true;
-        tooltip-text: _('Zoom');
-        vexpand: true;
-        adjustment: Gtk.Adjustment {
-          lower: 0;
-          upper: 100;
-          value: 0;
-        };
+      // Live camera preview — populated from code
+      Box _preview {
+        halign: center;
       }
 
-      Separator {
-        orientation: horizontal;
-        margin-start: 12;
-        margin-end: 12;
-      }
-
-      Box _buttonsBox {
-        homogeneous: true;
-        valign: center;
-        spacing: 4;
-        // Dummy buttons for previewing in Workbench - not actually used in the app
-        Button _preset1 {
-          label: '1';
-        }
-
-        Button _preset2 {
-          label: '2';
-          sensitive: false;
-        }
-      }
-
-      Separator {
-        orientation: horizontal;
-        margin-start: 12;
-        margin-end: 12;
-      }
-
+      // Controls row
       Box {
-        homogeneous: true;
-        valign: center;
         spacing: 4;
 
-        Button _fullScreen {
-          action-name: "app.toggle_view";
-          icon-name: "view-fullscreen-symbolic";
-          tooltip-text: _("View all settings (Ctrl+T)");
+        Box _panAndTiltButtons {}
+
+        Scale _zoom {
+          orientation: vertical;
+          hexpand: true;
+          inverted: true;
+          tooltip-text: _('Zoom');
+          vexpand: true;
+          adjustment: Gtk.Adjustment {
+            lower: 0;
+            upper: 100;
+            value: 0;
+          };
+        }
+
+        Separator {
+          orientation: horizontal;
+          margin-start: 12;
+          margin-end: 12;
+        }
+
+        Box _buttonsBox {
+          homogeneous: true;
+          valign: center;
+          spacing: 4;
+          // Dummy buttons for previewing in Workbench - not actually used in the app
+          Button _preset1 {
+            label: '1';
+          }
+
+          Button _preset2 {
+            label: '2';
+            sensitive: false;
+          }
+        }
+
+        Separator {
+          orientation: horizontal;
+          margin-start: 12;
+          margin-end: 12;
+        }
+
+        Box {
+          homogeneous: true;
+          valign: center;
+          spacing: 4;
+
+          Button _fullScreen {
+            action-name: "app.toggle_view";
+            icon-name: "view-fullscreen-symbolic";
+            tooltip-text: _("View all settings (Ctrl+T)");
+          }
         }
       }
     };

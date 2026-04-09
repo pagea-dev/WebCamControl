@@ -4,6 +4,7 @@ using Microsoft.Extensions.Logging;
 using WebCamControl.Core;
 using WebCamControl.Gtk.Extensions;
 using WebCamControl.Gtk.Widgets;
+using CameraPreview = WebCamControl.Gtk.Widgets.CameraPreview;
 
 namespace WebCamControl.Gtk;
 
@@ -17,12 +18,13 @@ public class FullWindow : Adw.Window
 	private readonly ILogger<FullWindow> _logger;
 
 #pragma warning disable CS0649 // Field is never assigned to, and will always have its default value
-	[Connect] private readonly CustomComboRow<ICamera> _cameraCombo = default!; 
+	[Connect] private readonly CustomComboRow<ICamera> _cameraCombo = default!;
 	[Connect] private readonly ListBox _controls = default!;
 	[Connect] private readonly ActionRow _exampleRow = default!;
 	[Connect] private readonly ListBox _presetsList = default!;
 	[Connect] private readonly ActionRow _panAndTiltRow = default!;
 	[Connect] private readonly Box _panAndTiltButtons = default!;
+	[Connect] private readonly Box _previewContainer = default!;
 #pragma warning restore CS0649 // Field is never assigned to, and will always have its default value
 
 	public FullWindow(
@@ -59,6 +61,7 @@ public class FullWindow : Adw.Window
 		InitializeCameras();
 		InitializeCamera();
 		InitializePresets();
+		InitializePreview();
 		_presets.OnChange += (_, _) => InitializePresets();
 	}
 	
@@ -123,6 +126,11 @@ public class FullWindow : Adw.Window
 		{
 			_controls.Append(control!);
 		}
+	}
+
+	private void InitializePreview()
+	{
+		_previewContainer.Append(new CameraPreview(_cameraManager.SelectedCamera, width: 640, height: 480));
 	}
 
 	private void InitializePresets()

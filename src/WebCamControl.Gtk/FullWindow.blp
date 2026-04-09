@@ -93,6 +93,18 @@ Adw.ApplicationWindow full_window {
             ]
           };
         }
+
+        Adw.ViewStackPage {
+          name: "preview";
+          title: _("Preview");
+          child: Box _previewContainer {
+            orientation: vertical;
+            halign: center;
+            valign: center;
+            hexpand: true;
+            vexpand: true;
+          };
+        }
       }
     };
   }
